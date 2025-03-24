@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script>
+    const aum = {
+      name: "YASH REDDY",
+      age: "25",
+      address: "101 s burbank",
+      city: "MONTGOMERY",
+      state: "Alabama",
+      zip: "36117",
+      phone: "470669999",
+      email: "yareddy@gmail.com",
+      description: function () {
+        return `Name: ${this.name}, Age: ${this.age}, Address: ${this.address}, City: ${this.city}, State: ${this.state}, Zip: ${this.zip}, Phone: ${this.phone}, Email: ${this.email}`;
+      }
+    };
+
+    function show_my_info() {
+      document.getElementById('demo_div').innerHTML = aum.description();
+    }
+    
+    function update_my_info() {
+      // Get values from input fields
+      aum.name = document.getElementById("input_name").value || aum.name;
+      aum.age = document.getElementById("input_age").value || aum.age;
+      aum.address = document.getElementById("input_address").value || aum.address;
+      aum.city = document.getElementById("input_city").value || aum.city;
+      aum.state = document.getElementById("input_state").value || aum.state;
+      aum.zip = document.getElementById("input_zip").value || aum.zip;
+      aum.phone = document.getElementById("input_phone").value || aum.phone;
+      aum.email = document.getElementById("input_email").value || aum.email;
+    }
+  </script>
+</head>
+<body>
+  <h1>My Information</h1>
+  <button onclick="show_my_info()">Show My Info</button>
+  <div id="demo_div"></div>
+  
+  <h2>Update Info</h2>
+  <input type="text" id="input_name" placeholder="Enter new name">
+  <input type="text" id="input_age" placeholder="Enter new age">
+  <input type="text" id="input_address" placeholder="Enter new address">
+  <input type="text" id="input_city" placeholder="Enter new city">
+  <input type="text" id="input_state" placeholder="Enter new state">
+  <input type="text" id="input_zip" placeholder="Enter new zip">
+  <input type="text" id="input_phone" placeholder="Enter new phone">
+  <input type="text" id="input_email" placeholder="Enter new email">
+  <br>
+  <button onclick="update_my_info();">Update Info</button>
+</body>
+</html>
