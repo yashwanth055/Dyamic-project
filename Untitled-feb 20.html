@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  
+  <script>
+    function Aum(name, age, address, city, state, zip, phone, email) {
+      this.name = name;
+      this.age = age;
+      this.address = address;
+      this.city = city;
+      this.state = state;
+      this.zip = zip;
+      this.phone = phone;
+      this.email = email;
+      this.description = function () {
+        return `Name: ${this.name}, Age: ${this.age}, Address: ${this.address}, City: ${this.city}, State: ${this.state}, Zip: ${this.zip}, Phone: ${this.phone}, Email: ${this.email}`;
+      };
+    }
+
+    let aumData = [
+      new Aum("yash", "25", "101 s EAST DR", "MONTGOMERY", "AL", "36117", "334-912-7399", "sushma@example.com")
+    ];
+
+    function show_my_info() {
+      let infoDiv = document.getElementById('info_display');
+      infoDiv.innerHTML = "<h2>Stored Information</h2>";
+
+      aumData.forEach((entry, index) => {
+        infoDiv.innerHTML += `<p><strong>Entry ${index + 1}:</strong> ${entry.description()}</p>`;
+      });
+    }
+
+    function update_my_info() {
+      if (aumData.length === 0) return;
+
+      let firstEntry = aumData[0];
+
+      firstEntry.name = document.getElementById('input_name').value || firstEntry.name;
+      firstEntry.age = document.getElementById('input_age').value || firstEntry.age;
+      firstEntry.address = document.getElementById('input_address').value || firstEntry.address;
+      firstEntry.city = document.getElementById('input_city').value || firstEntry.city;
+      firstEntry.state = document.getElementById('input_state').value || firstEntry.state;
+      firstEntry.zip = document.getElementById('input_zip').value || firstEntry.zip;
+      firstEntry.phone = document.getElementById('input_phone').value || firstEntry.phone;
+      firstEntry.email = document.getElementById('input_email').value || firstEntry.email;
+
+      show_my_info();
+    }
+
+    function insert_my_info() {
+      let name = document.getElementById('input_name').value.trim();
+      let age = document.getElementById('input_age').value.trim();
+      let address = document.getElementById('input_address').value.trim();
+      let city = document.getElementById('input_city').value.trim();
+      let state = document.getElementById('input_state').value.trim();
+      let zip = document.getElementById('input_zip').value.trim();
+      let phone = document.getElementById('input_phone').value.trim();
+      let email = document.getElementById('input_email').value.trim();
+
+      let newAum = new Aum(name, age, address, city, state, zip, phone, email);
+      aumData.push(newAum);
+
+      show_my_info();
+
+     
+      document.getElementById('input_name').value = "";
+      document.getElementById('input_age').value = "";
+      document.getElementById('input_address').value = "";
+      document.getElementById('input_city').value = "";
+      document.getElementById('input_state').value = "";
+      document.getElementById('input_zip').value = "";
+      document.getElementById('input_phone').value = "";
+      document.getElementById('input_email').value = "";
+    }
+
+    function refresh_my_info() {
+      location.reload();
+    }
+    function search_my_info() {
+  let searchTerm = document.getElementById('search_my_info').value.trim().toLowerCase();
+  let filteredData = aumData.filter((entry) =>
+    entry.name.toLowerCase().includes(searchTerm) ||
+    entry.age.toLowerCase().includes(searchTerm) ||
+    entry.address.toLowerCase().includes(searchTerm) ||
+    entry.city.toLowerCase().includes(searchTerm) ||
+    entry.state.toLowerCase().includes(searchTerm) ||
+    entry.zip.toLowerCase().includes(searchTerm) ||
+    entry.phone.toLowerCase().includes(searchTerm) ||
+    entry.email.toLowerCase().includes(searchTerm)
+  );
+
+  let infoDiv = document.getElementById('info_display');
+  infoDiv.innerHTML = "<h2>Search Results</h2>";
+
+  if (filteredData.length === 0) {
+    infoDiv.innerHTML += "<p>No matching records found.</p>";
+  } else {
+    filteredData.forEach((entry, index) => {
+      infoDiv.innerHTML += `<p><strong>Entry ${index + 1}:</strong> ${entry.description()}</p>`;
+    });
+  }
+}
+
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #info_display {
+      border: 1px solid black;
+      padding: 10px;
+      margin: 20px;
+    }
+    #info_display h2 {
+      text-align: center;
+    }
+    #info_display p {
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Information</h1>
+  <button onclick="show_my_info()">Show My Info</button>
+  <button onclick="refresh_my_info();">Refresh Info</button>
+
+  <div id="info_display">
+    <h2>Stored Information</h2>
+  </div>
+
+  <h2>Update / Insert Info</h2>
+  <input type="text" id="input_name" placeholder="Enter new name">
+  <input type="text" id="input_age" placeholder="Enter new age">
+  <input type="text" id="input_address" placeholder="Enter new address">
+  <input type="text" id="input_city" placeholder="Enter new city">
+  <input type="text" id="input_state" placeholder="Enter new state">
+  <input type="text" id="input_zip" placeholder="Enter new zip">
+  <input type="text" id="input_phone" placeholder="Enter new phone">
+  <input type="text" id="input_email" placeholder="Enter new email">
+  <br>
+  <button onclick="update_my_info();">Update First Entry</button>
+  <button onclick="insert_my_info();">Insert New Entry</button>
+  <input type="text" id="search_my_info" placeholder="Enter to search" onkeyup="search_my_info();">
+  
+</body>
+</html>
